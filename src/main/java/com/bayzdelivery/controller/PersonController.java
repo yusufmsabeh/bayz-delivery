@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.bayzdelivery.service.PersonService;
 
-@RestController()
+@RestController
 @RequestMapping("/person")
 public class PersonController {
 
