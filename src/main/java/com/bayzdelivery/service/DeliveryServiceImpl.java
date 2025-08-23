@@ -14,7 +14,9 @@ public class DeliveryServiceImpl implements DeliveryService {
   DeliveryRepository deliveryRepository;
 
   public Delivery save(Delivery delivery) {
-    return deliveryRepository.save(delivery);
+      double commission = calculateCommission(delivery);
+      delivery.setComission(commission);
+      return deliveryRepository.save(delivery);
   }
 
   public Delivery findById(Long deliveryId) {
@@ -22,5 +24,9 @@ public class DeliveryServiceImpl implements DeliveryService {
     if (optionalDelivery.isPresent()) {
       return optionalDelivery.get();
     }else return null;
+  }
+
+  public double calculateCommission(Delivery delivery){
+      return  delivery.getPrice()*0.05 + delivery.getDistance()*0.5;
   }
 }
