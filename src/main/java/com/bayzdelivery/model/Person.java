@@ -1,12 +1,8 @@
 package com.bayzdelivery.model;
 
 import java.io.Serializable;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
@@ -32,6 +28,11 @@ public class Person implements Serializable{
 
   @Column(name = "registration_number")
   String registrationNumber;
+
+  @NotNull
+  @Enumerated(EnumType.STRING)
+  @Column(name = "type")
+  TypeEnum type;
 
   public Long getId() {
     return id;
@@ -64,6 +65,14 @@ public class Person implements Serializable{
   public void setRegistrationNumber(String registrationNumber) {
     this.registrationNumber = registrationNumber;
   }
+
+  public TypeEnum getType() {
+        return type;
+    }
+
+    public void setType(TypeEnum type) {
+        this.type = type;
+    }
 
   @Override
   public int hashCode() {

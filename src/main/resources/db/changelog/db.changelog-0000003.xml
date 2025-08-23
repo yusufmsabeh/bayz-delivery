@@ -7,10 +7,13 @@
 
     <changeSet id="add_type_column" author="bayzdelivery">
         <sql endDelimiter=";">
-            CREATE TYPE type_enum AS ENUM ('customer', 'delivery_man');
+            CREATE TYPE type_enum AS ENUM ('CUSTOMER', 'DELIVERY_MAN');
+        </sql>
+        <sql endDelimiter=";">
+            CREATE CAST (character varying AS type_enum) with inout as assignment;
         </sql>
         <addColumn tableName="person">
-            <column name="type" type="type_enum"  defaultValue="customer" >
+            <column name="type" type="type_enum"  defaultValue="CUSTOMER" >
                 <constraints nullable="false"/>
             </column>
         </addColumn>
