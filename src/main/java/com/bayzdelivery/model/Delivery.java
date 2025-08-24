@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.Instant;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,6 +40,7 @@ public class Delivery implements Serializable{
   Long price;
 
   @Column(name = "comission")
+  @JsonProperty(access = JsonProperty.Access.READ_ONLY)
   Double comission;
 
   @ManyToOne
