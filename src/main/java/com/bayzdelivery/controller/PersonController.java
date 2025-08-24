@@ -1,7 +1,9 @@
 package com.bayzdelivery.controller;
 
+import java.time.Instant;
 import java.util.List;
 
+import com.bayzdelivery.dto.Top3DeliveryMenResponse;
 import com.bayzdelivery.dto.PersonRequest;
 import com.bayzdelivery.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,10 @@ public class PersonController {
       return ResponseEntity.ok(person);
     }
     return ResponseEntity.notFound().build();
+  }
+  @GetMapping(path = "/top3")
+    public ResponseEntity<List<Top3DeliveryMenResponse>> getTop3DeliveryMen(@RequestParam("startDate") Instant startDate , @RequestParam("endDate") Instant endDate){
+      return ResponseEntity.ok(personService.getTop3DeliveryMen(startDate,endDate));
   }
 
 }

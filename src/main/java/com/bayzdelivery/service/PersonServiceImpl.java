@@ -1,12 +1,13 @@
 package com.bayzdelivery.service;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.bayzdelivery.dto.Top3DeliveryMenResponse;
 import com.bayzdelivery.dto.PersonRequest;
 import com.bayzdelivery.model.StatusEnum;
-import com.bayzdelivery.model.TypeEnum;
 import com.bayzdelivery.repositories.PersonRepository;
 import com.bayzdelivery.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,10 @@ public class PersonServiceImpl implements PersonService {
         person.setRegistrationNumber(p.getRegistrationNumber());
         return personRepository.save(person);
     }
-
+    @Override
+    public List<Top3DeliveryMenResponse> getTop3DeliveryMen(Instant startDate, Instant endDate){
+        return personRepository.getTop3DeliveryMenCommission(startDate, endDate);
+    }
     @Override
     public Person findById(Long personId) {
         Optional<Person> dbPerson = personRepository.findById(personId);
