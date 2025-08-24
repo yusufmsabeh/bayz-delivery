@@ -1,7 +1,11 @@
 package com.bayzdelivery.controller;
 
+import com.bayzdelivery.dto.DeliveryRequest;
+import com.bayzdelivery.exceptions.GlobalExceptionHandler;
 import com.bayzdelivery.model.Delivery;
+import com.bayzdelivery.model.TypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.bayzdelivery.service.DeliveryService;
@@ -14,8 +18,8 @@ public class DeliveryController {
   DeliveryService deliveryService;
 
   @PostMapping()
-  public ResponseEntity<Delivery> createNewDelivery(@RequestBody Delivery delivery) {
-    return ResponseEntity.ok(deliveryService.save(delivery));
+  public ResponseEntity<Delivery> createNewDelivery(@RequestBody DeliveryRequest delivery){
+      return ResponseEntity.ok(deliveryService.save(delivery));
   }
 
   @GetMapping(path = "/{delivery-id}")
