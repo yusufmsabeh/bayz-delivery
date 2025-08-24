@@ -23,6 +23,12 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     public Delivery save(DeliveryRequest request) {
+        /*
+        *
+        * Logic for preventing the customer from making a delivery and a delivery man from making an order
+        * newly added column used to do this feature ( validation ), Type column
+        *
+        * */
       Person deliveryMan = personService.findById(request.getDeliveryManId());
       Person customer = personService.findById(request.getCustomerId());
       if (deliveryMan.getType() != TypeEnum.DELIVERY_MAN || customer.getType() != TypeEnum.CUSTOMER) {
@@ -51,6 +57,10 @@ public class DeliveryServiceImpl implements DeliveryService {
     }else return null;
   }
 
+  /*
+  *
+  * Separate the function for the controller function itself for better maintainability and reusability
+  * */
   public double calculateCommission(DeliveryRequest delivery){
       return  delivery.getPrice()*0.05 + delivery.getDistance()*0.5;
   }

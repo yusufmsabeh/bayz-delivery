@@ -40,6 +40,7 @@ public class Delivery implements Serializable{
   Long price;
 
   @Column(name = "comission")
+  // Used this annotation to prevent accidentally set commission from API request
   @JsonProperty(access = JsonProperty.Access.READ_ONLY)
   Double comission;
 

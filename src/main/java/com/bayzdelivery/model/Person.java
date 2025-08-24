@@ -30,12 +30,13 @@ public class Person implements Serializable{
   @Column(name = "registration_number")
   String registrationNumber;
 
+  // This column for separating customers from delivery men
   @NotNull
   @Enumerated(EnumType.STRING)
   @Column(name = "type")
   TypeEnum type;
 
-
+  // This column used to indicate the delivery man status ( BUSY, FREE)
   @Enumerated(EnumType.STRING)
   @Column(name="status")
   @JsonProperty(access = JsonProperty.Access.READ_ONLY)

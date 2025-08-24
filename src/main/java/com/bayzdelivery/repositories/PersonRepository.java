@@ -13,7 +13,10 @@ import java.util.List;
 
 @RestResource(exported=false)
 public interface PersonRepository extends CrudRepository<Person, Long>, PagingAndSortingRepository<Person, Long> {
-
+    /*
+    *
+    * Custom repository function to get top 3 delivery men with the most commission long side with their commission average
+    * */
     @Query("SELECT NEW com.bayzdelivery.dto.Top3DeliveryMenResponse(\n" +
         "    p.id, \n" +
         "    p.name, \n" +
