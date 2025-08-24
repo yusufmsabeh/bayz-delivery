@@ -2,6 +2,7 @@ package com.bayzdelivery.model;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -34,7 +35,21 @@ public class Person implements Serializable{
   @Column(name = "type")
   TypeEnum type;
 
-  public Long getId() {
+
+  @Enumerated(EnumType.STRING)
+  @Column(name="status")
+  @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+  StatusEnum status;
+
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
+    }
+
+    public Long getId() {
     return id;
   }
 

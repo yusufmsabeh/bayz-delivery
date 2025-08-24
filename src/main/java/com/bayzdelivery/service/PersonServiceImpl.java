@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.bayzdelivery.dto.PersonRequest;
+import com.bayzdelivery.model.StatusEnum;
+import com.bayzdelivery.model.TypeEnum;
 import com.bayzdelivery.repositories.PersonRepository;
 import com.bayzdelivery.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +25,14 @@ public class PersonServiceImpl implements PersonService {
         return personList;
     }
 
-    public Person save(Person p) {
-        return personRepository.save(p);
+    public Person save(PersonRequest p) {
+        Person person = new Person();
+        person.setName(p.getName());
+        person.setEmail(p.getEmail());
+        person.setStatus(StatusEnum.FREE);
+        person.setType(p.getType());
+        person.setRegistrationNumber(p.getRegistrationNumber());
+        return personRepository.save(person);
     }
 
     @Override

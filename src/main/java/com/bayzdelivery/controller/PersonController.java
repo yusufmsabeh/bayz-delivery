@@ -2,6 +2,7 @@ package com.bayzdelivery.controller;
 
 import java.util.List;
 
+import com.bayzdelivery.dto.PersonRequest;
 import com.bayzdelivery.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class PersonController {
   PersonService personService;
 
   @PostMapping()
-  public ResponseEntity<Person> register(@RequestBody Person p) {
+  public ResponseEntity<Person> register(@RequestBody PersonRequest p) {
     return ResponseEntity.ok(personService.save(p));
   }
 

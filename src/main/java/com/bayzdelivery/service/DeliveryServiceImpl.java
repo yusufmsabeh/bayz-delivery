@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.bayzdelivery.dto.DeliveryRequest;
 import com.bayzdelivery.model.Person;
+import com.bayzdelivery.model.StatusEnum;
 import com.bayzdelivery.model.TypeEnum;
 import com.bayzdelivery.repositories.DeliveryRepository;
 import com.bayzdelivery.model.Delivery;
@@ -25,6 +26,9 @@ public class DeliveryServiceImpl implements DeliveryService {
       Person deliveryMan = personService.findById(request.getDeliveryManId());
       Person customer = personService.findById(request.getCustomerId());
       if (deliveryMan.getType() != TypeEnum.DELIVERY_MAN || customer.getType() != TypeEnum.CUSTOMER) {
+          return null;
+      }
+      if (deliveryMan.getStatus()== StatusEnum.BUSY){
           return null;
       }
       Delivery delivery = new Delivery();
