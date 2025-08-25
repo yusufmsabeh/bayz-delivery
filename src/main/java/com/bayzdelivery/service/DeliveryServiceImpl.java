@@ -3,11 +3,13 @@ package com.bayzdelivery.service;
 import java.util.Optional;
 
 import com.bayzdelivery.dto.DeliveryRequest;
+import com.bayzdelivery.exceptions.ApiResponseException;
 import com.bayzdelivery.model.Person;
 import com.bayzdelivery.model.StatusEnum;
 import com.bayzdelivery.model.TypeEnum;
 import com.bayzdelivery.repositories.DeliveryRepository;
 import com.bayzdelivery.model.Delivery;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -32,10 +34,10 @@ public class DeliveryServiceImpl implements DeliveryService {
       Person deliveryMan = personService.findById(request.getDeliveryManId());
       Person customer = personService.findById(request.getCustomerId());
       if (deliveryMan.getType() != TypeEnum.DELIVERY_MAN || customer.getType() != TypeEnum.CUSTOMER) {
-          return null;
+          throw new ApiResponseException("User cannot make a delivery", HttpStatus.BAD_REQUEST);
       }
       if (deliveryMan.getStatus()== StatusEnum.BUSY){
-          return null;
+          throw  new ApiResponseException("The delivery man is busy", HttpStatus.BAD_REQUEST);
       }
       Delivery delivery = request.getInstance();
       delivery.setDeliveryMan(deliveryMan);

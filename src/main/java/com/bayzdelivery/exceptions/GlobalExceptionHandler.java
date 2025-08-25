@@ -35,4 +35,11 @@ public class GlobalExceptionHandler {
         });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(ApiResponseException.class)
+    public ResponseEntity<Map<String ,String>> handleValidationExceptions(ApiResponseException exception){
+        Map<String,String > errors = new HashMap<>();
+        errors.put("message",exception.getMessage());
+        return new ResponseEntity<>(errors, exception.httpStatus);
+    }
 }
