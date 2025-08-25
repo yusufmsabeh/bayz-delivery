@@ -6,6 +6,7 @@ import java.util.List;
 import com.bayzdelivery.dto.Top3DeliveryMenResponse;
 import com.bayzdelivery.dto.PersonRequest;
 import com.bayzdelivery.model.Person;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class PersonController {
   PersonService personService;
 
   @PostMapping()
-  public ResponseEntity<Person> register(@RequestBody PersonRequest p) {
+  public ResponseEntity<Person> register(@Valid @RequestBody PersonRequest p) {
     return ResponseEntity.ok(personService.save(p));
   }
 

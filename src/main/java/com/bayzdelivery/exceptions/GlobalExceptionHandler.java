@@ -1,11 +1,15 @@
 package com.bayzdelivery.exceptions;
 
 import java.util.AbstractMap;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -22,4 +26,13 @@ public class GlobalExceptionHandler {
         new AbstractMap.SimpleEntry<>("message", "Request could not be processed");
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
   }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String ,String>> handleValidationExceptions(MethodArgumentNotValidException exception){
+        Map<String,String > errors = new HashMap<>();
+        exception.getBindingResult().getFieldErrors().forEach(error->{
+            errors.put(error.getField(),error.getDefaultMessage());
+        });
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
 }
