@@ -1,8 +1,14 @@
 package com.bayzdelivery.dto;
 
+import com.bayzdelivery.model.Person;
 import com.bayzdelivery.model.TypeEnum;
 
 public class PersonRequest {
+    private String name;
+    private String email;
+    private TypeEnum type;
+    private String registrationNumber;
+
     public String getName() {
         return name;
     }
@@ -34,9 +40,12 @@ public class PersonRequest {
     public void setRegistrationNumber(String registrationNumber) {
         this.registrationNumber = registrationNumber;
     }
-
-    private String name;
-    private String email;
-    private TypeEnum type;
-    private String registrationNumber;
+    public Person getInstance(){
+        Person person = new Person();
+        person.setName(this.name);
+        person.setEmail(this.email);
+        person.setType(this.type);
+        person.setRegistrationNumber(this.registrationNumber);
+        return person;
+    }
 }

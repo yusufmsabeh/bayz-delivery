@@ -27,12 +27,9 @@ public class PersonServiceImpl implements PersonService {
     }
 
     public Person save(PersonRequest p) {
-        Person person = new Person();
-        person.setName(p.getName());
-        person.setEmail(p.getEmail());
+
+        Person person =  p.getInstance();
         person.setStatus(StatusEnum.FREE);
-        person.setType(p.getType());
-        person.setRegistrationNumber(p.getRegistrationNumber());
         return personRepository.save(person);
     }
     @Override

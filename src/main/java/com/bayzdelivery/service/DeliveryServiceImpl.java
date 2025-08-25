@@ -37,14 +37,9 @@ public class DeliveryServiceImpl implements DeliveryService {
       if (deliveryMan.getStatus()== StatusEnum.BUSY){
           return null;
       }
-      Delivery delivery = new Delivery();
-      delivery.setDistance(request.getDistance());
-      delivery.setStartTime(request.getStartTime());
-      delivery.setEndTime(request.getEndTime());
-      delivery.setPrice(request.getPrice());
+      Delivery delivery = request.getInstance();
       delivery.setDeliveryMan(deliveryMan);
       delivery.setCustomer(customer);
-
       double commission = calculateCommission(request);
       delivery.setComission(commission);
       return deliveryRepository.save(delivery);

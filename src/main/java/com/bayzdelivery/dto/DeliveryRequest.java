@@ -1,5 +1,11 @@
 package com.bayzdelivery.dto;
 
+import com.bayzdelivery.model.Delivery;
+import com.bayzdelivery.model.Person;
+import com.bayzdelivery.repositories.PersonRepository;
+import com.bayzdelivery.service.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.time.Instant;
 
 public class DeliveryRequest {
@@ -8,6 +14,9 @@ public class DeliveryRequest {
 
     private Long price;
     private Long distance;
+
+    private Instant startTime;
+    private Instant endTime;
 
     public Instant getEndTime() {
         return endTime;
@@ -24,9 +33,6 @@ public class DeliveryRequest {
     public void setStartTime(Instant startTime) {
         this.startTime = startTime;
     }
-
-    private Instant startTime;
-    private Instant endTime;
 
     public Long getDeliveryManId() {
         return deliveryManId;
@@ -58,5 +64,13 @@ public class DeliveryRequest {
 
     public void setDistance(Long distance) {
         this.distance = distance;
+    }
+    public Delivery getInstance(){
+        Delivery delivery = new Delivery();
+        delivery.setDistance(this.distance);
+        delivery.setStartTime(this.startTime);
+        delivery.setEndTime(this.endTime);
+        delivery.setPrice(this.price);
+        return delivery;
     }
 }
