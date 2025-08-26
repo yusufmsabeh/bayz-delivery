@@ -3,6 +3,7 @@ package com.bayzdelivery.controller;
 import java.time.Instant;
 import java.util.List;
 
+import com.bayzdelivery.dto.Top3DeliveryMenRequest;
 import com.bayzdelivery.dto.Top3DeliveryMenResponse;
 import com.bayzdelivery.dto.PersonRequest;
 import com.bayzdelivery.model.Person;
@@ -38,8 +39,8 @@ public class PersonController {
     return ResponseEntity.notFound().build();
   }
   @GetMapping(path = "/top3")
-    public ResponseEntity<List<Top3DeliveryMenResponse>> getTop3DeliveryMen(@RequestParam("startDate") Instant startDate , @RequestParam("endDate") Instant endDate){
-      return ResponseEntity.ok(personService.getTop3DeliveryMen(startDate,endDate));
+    public ResponseEntity<List<Top3DeliveryMenResponse>> getTop3DeliveryMen(@Valid @ModelAttribute() Top3DeliveryMenRequest top3DeliveryMenRequest ){
+      return ResponseEntity.ok(personService.getTop3DeliveryMen(top3DeliveryMenRequest.getStartDate(),top3DeliveryMenRequest.getEndDate()));
   }
 
 }
