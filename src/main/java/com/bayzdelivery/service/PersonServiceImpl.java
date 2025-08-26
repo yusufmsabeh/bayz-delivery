@@ -7,10 +7,12 @@ import java.util.Optional;
 
 import com.bayzdelivery.dto.Top3DeliveryMenResponse;
 import com.bayzdelivery.dto.PersonRequest;
+import com.bayzdelivery.exceptions.ApiResponseException;
 import com.bayzdelivery.model.StatusEnum;
 import com.bayzdelivery.repositories.PersonRepository;
 import com.bayzdelivery.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -39,6 +41,9 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person findById(Long personId) {
         Optional<Person> dbPerson = personRepository.findById(personId);
-        return dbPerson.orElse(null);
+        if(dbPerson.isEmpty()){
+            throw new ApiResponseException("There is no user with this ID " + personId, HttpStatus.NOT_FOUND);
+        }
+        return dbPerson.get();
     }
 }
